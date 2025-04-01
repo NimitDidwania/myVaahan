@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+.vehicle-card {
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.vehicle-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  h3 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  
+  .badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+}
+
+.vehicle-body {
+  padding: 20px;
+}
+
+.vehicle-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+  
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    
+    .label {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    
+    .value {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #111827;
+    }
+  }
+}
+
+.documents-status {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  
+  .status-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    
+    .count {
+      margin-right: 5px;
+      font-weight: 600;
+    }
+    
+    &.expired {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    
+    &.warning {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    
+    &.valid {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+  }
+}
+
+.vehicle-actions {
+  display: flex;
+  border-top: 1px solid #e5e7eb;
+  padding: 12px;
+  
+  .btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    
+    i {
+      font-size: 0.9rem;
+    }
+    
+    &:hover {
+      background: #f3f4f6;
+    }
+    
+    &.view-btn {
+      color: #3b82f6;
+    }
+    
+    &.edit-btn {
+      color: #8b5cf6;
+    }
+    
+    &.delete-btn {
+      color: #ef4444;
+    }
+  }
+}

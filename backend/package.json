@@ -1,0 +1,72 @@
+{
+  "name": "myVaahan-backend",
+  "version": "1.0.0",
+  "description": "myVaahan - Vehicle Management Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start_api": "npm run clean_and_build && node ./dist/hosts/api/app.local.js",
+    "dev": "ts-node src/app.local.ts",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.png src/**/*.css dist/src/",
+    "copy-assets": "copyfiles -u 1 assets/*.png dist/assets/",
+    "build": "tsc && npm run copy-files && npm run copy-assets",
+    "clean_and_build": "npm run clean && npm run build"
+  },
+  "author": "Nimit Didwania",
+  "license": "ISC",
+  "devDependencies": {
+    "@joi/date": "^2.1.0",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/knex": "^0.16.1",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^18.19.47",
+    "@types/ssh2": "^1.11.18",
+    "@types/uuid": "^8.3.4",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^7.0.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.627.0",
+    "@aws-sdk/s3-request-presigner": "^3.627.0",
+    "@fast-csv/format": "^5.0.2",
+    "@types/mocha": "^10.0.7",
+    "@types/mongodb": "^4.0.7",
+    "@vendia/serverless-express": "^4.12.6",
+    "aws-lambda": "^1.0.7",
+    "axios": "^1.7.7",
+    "axios-retry": "^4.5.0",
+    "buffer-to-stream": "^1.0.0",
+    "copyfiles": "^2.4.1",
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5",
+    "enrich-user-management": "file:",
+    "express": "^4.21.0",
+    "fs": "^0.0.1-security",
+    "handlebars": "^4.7.8",
+    "http-status-codes": "^2.1.4",
+    "inversify": "^5.1.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.1",
+    "mongodb": "^3.7.4",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.14",
+    "path": "^0.12.7",
+    "puppeteer": "^23.6.0",
+    "reflect-metadata": "^0.1.14",
+    "rimraf": "^6.0.1",
+    "serverless-http": "^3.2.0",
+    "string-strip-html": "^8.5.0",
+    "to-words": "^4.1.0",
+    "uuid": "^10.0.0"
+  },
+  "overrides": {
+    "@types/mongodb": {
+      "@types/bson": "4.0.5"
+    }
+  }
+}

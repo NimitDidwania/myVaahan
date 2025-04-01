@@ -1,0 +1,46 @@
+<!-- src/app/features/vehicles/vehicle-card/vehicle-card.component.html -->
+<div class="vehicle-card">
+    <div class="vehicle-header">
+      <h3>{{ vehicle.make }} {{ vehicle.model }}</h3>
+      <span class="badge">{{ vehicle.vehicleType }}</span>
+    </div>
+    
+    <div class="vehicle-body">
+      <div class="vehicle-info">
+        <div class="info-item">
+          <span class="label">Reg. No.</span>
+          <span class="value">{{ vehicle.registrationNumber }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Year</span>
+          <span class="value">{{ vehicle.year }}</span>
+        </div>
+      </div>
+      
+      <div class="documents-status">
+        <div class="status-item expired" *ngIf="expiredDocumentsCount > 0">
+          <span class="count">{{ expiredDocumentsCount }}</span>
+          <span class="label">Expired</span>
+        </div>
+        <div class="status-item warning" *ngIf="expiringSoonDocumentsCount > 0">
+          <span class="count">{{ expiringSoonDocumentsCount }}</span>
+          <span class="label">Expiring Soon</span>
+        </div>
+        <div class="status-item valid" *ngIf="expiredDocumentsCount === 0 && expiringSoonDocumentsCount === 0">
+          <span class="label">All documents valid</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="vehicle-actions">
+      <button class="btn view-btn" (click)="onView()">
+        <i class="fas fa-eye"></i> View
+      </button>
+      <button class="btn edit-btn" (click)="onEdit()">
+        <i class="fas fa-edit"></i> Edit
+      </button>
+      <button class="btn delete-btn" (click)="onDelete()">
+        <i class="fas fa-trash"></i> Delete
+      </button>
+    </div>
+  </div>

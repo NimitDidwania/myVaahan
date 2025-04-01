@@ -1,0 +1,204 @@
+/* Header and Footer Styling */
+header {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #007bff;
+    color: white;
+  }
+  
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+    color: #6c757d;
+  }
+  
+  /* Invoice List Styling */
+  .invoice-list {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 10px;
+    background: #ffffff;
+  }
+  
+  /* Card Styling */
+  .card {
+    border: none;
+    border-left: 5px solid #007bff;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    line-height: 1.6;
+  }
+  
+  /* Buttons */
+  .btn {
+    border-radius: 50px;
+  }
+  
+  .btn-sm {
+    font-size: 0.875rem;
+  }
+  
+  .btn-outline-success {
+    border: 1px solid #28a745;
+  }
+  
+  .btn-outline-primary {
+    border: 1px solid #007bff;
+  }
+  
+  /* Floating Action Button */
+  .btn-lg {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+  }
+  
+  /* Pagination */
+  .pagination {
+    margin-top: 15px;
+  }
+  
+  .page-item .page-link {
+    border-radius: 50px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+  
+    .card {
+        margin: 0.5rem 0;
+        background-color: #f8f9fa;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    nav {
+        margin-bottom: 10px;
+    }
+  }
+  
+  nav {
+    margin-bottom: 20px;
+  }
+  
+  /* Calendar Popup Styling */
+  .position-absolute {
+    max-width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 576px) {
+    .position-absolute {
+        right: 20px; /* Adjust the position for small screens */
+    }
+  }
+  
+  /* General Input Group Styling */
+  .input-group {
+    background: #f8f9fa; /* Light grey background for the group */
+    border-radius: 0.25rem; /* Consistent rectangular styling */
+  }
+  
+  .input-group .form-control {
+    border: 1px solid #ced4da; /* Light border for the input */
+    padding: 0.75rem 1rem; /* Spacious padding for better usability */
+  }
+  
+  .input-group .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ced4da; /* Match the input border */
+    padding: 0.5rem 1rem; /* Consistent padding */
+  }
+  
+  .input-group .btn i {
+    font-size: 1rem; /* Consistent icon size */
+  }
+  
+  /* Dropdown Menu Styling */
+  .dropdown-menu {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Subtle shadow for a modern look */
+    border-radius: 0.25rem; /* Match the button styling */
+    min-width: 200px; /* Comfortable width for the dropdown */
+  }
+  
+  /* Calendar Popup Styling */
+  .position-absolute {
+    width: 300px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem; /* Match styling with other elements */
+  }
+  
+  /* Improve Hover Effect */
+  .btn-outline-secondary:hover {
+    background-color: #e9ecef; /* Light hover effect */
+    transition: background-color 0.3s;
+  }
+  
+  
+  /* Dropdown menu styles for better alignment */
+  .dropdown-menu {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Modern shadow */
+    border-radius: 0.25rem; /* Consistent rounded corners */
+    min-width: 200px; /* Comfortable dropdown width */
+  }
+  
+  /* Adjust the Download Button (btn-icon) to match the search bar and calendar button */
+  .btn-icon {
+    background: #f8f9fa; /* Match the input group background */
+    border: 1px solid #ced4da; /* Add a border like other buttons */
+    padding: 0.5rem; /* Consistent padding */
+    border-radius: 0.25rem; /* Rounded corners for unity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .btn-icon i {
+    font-size: 1.5rem; /* Keep the icon size consistent */
+    color: #6c757d; /* Neutral color */
+    transition: color 0.3s ease; /* Smooth hover effect for icon */
+  }
+  
+  .btn-icon:hover {
+    background-color: #e9ecef; /* Light hover effect like other buttons */
+    /* border-color: #007bff;  Highlight border on hover */
+  }
+  
+  .btn-icon:hover i {
+    color: #007bff; /* Highlight icon color on hover */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Ensures space between the buttons */
+    align-items: center; /* Aligns buttons vertically in the center */
+    margin-top: 10px;
+  }
+  
+  .button-container button {
+    flex: 1; /* Makes the buttons share equal width */
+    margin: 0 5px; /* Adds space between buttons */
+  }

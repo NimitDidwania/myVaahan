@@ -1,0 +1,30 @@
+.container {
+    max-width: 900px;
+  }
+  
+  .card {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .table {
+    margin-bottom: 0;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  .thead-dark th {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  .ledger-list {
+    max-height: 80vh; /* Ensure scrolling if the list is long */
+    overflow-y: auto;
+  }
+  .invoice-list {
+    max-height: 80vh; /* Ensure scrolling if the list is long */
+    overflow-y: auto;
+  }
+  

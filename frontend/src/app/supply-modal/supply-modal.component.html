@@ -1,0 +1,78 @@
+<div class="modal fade" id="supplyModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="invoiceModalLabel">{{type}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="submit()">
+
+            <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" class="form-control" id="date" [(ngModel)]="date" name="date" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="challan" class="form-label">Challan</label>
+              <input type="text" class="form-control" id="challan" [(ngModel)]="supply.challan" name="challan" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Supplier</label>
+                <select 
+                  class="form-control" 
+                  id="name" 
+                  [(ngModel)]="supply.supplier" 
+                  name="name" 
+                  required>
+                  <option [ngValue]="null" disabled>Select a supplier</option>
+                  <option *ngFor="let supplier of suppliers" [ngValue]="supplier">{{supplier.name}}</option>
+                </select>
+              </div>
+            <div class="mb-3 required">
+              <label for="vehicle" class="form-label">Vehicle</label>
+              <input type="text" class="form-control" id="vehcile" [(ngModel)]="supply.vehicle" name="vehicle" required>
+            </div> 
+            <div class="mb-3">
+                <label for="weight" class="form-label">Weight</label>
+                <input type="number" class="form-control" id="weight" [(ngModel)]="supply.weight" name="vehicle">
+            </div> 
+
+            <div class="mb-3">
+                <label for="rate" class="form-label">Rate</label>
+                <input type="number" class="form-control" id="rate" [(ngModel)]="supply.rate" name="rate">
+            </div> 
+
+            <div class="mb-3">
+                <label for="dust" class="form-label">Dust</label>
+                <input type="number" class="form-control" id="dust" [(ngModel)]="supply.dust" name="dust">
+            </div> 
+
+            <div class="mb-3">
+                <label for="moisture" class="form-label">Moisture</label>
+                <input type="number" class="form-control" id="dust" [(ngModel)]="supply.moisture" name="moisture">
+            </div> 
+
+            <div class="mb-3">
+              <label for="cash" class="form-label">Cash</label>
+              <input type="number" class="form-control" id="cash" [(ngModel)]="supply.cash" name="cash">
+            </div> 
+
+            <div class="mb-3">
+              <label for="remark" class="form-label">Remark</label>
+              <input type="text" class="form-control" id="remark" [(ngModel)]="supply.remark" name="remark">
+            </div>
+
+            <div class="mb-3">
+                <input type="checkbox"  id="serviceCharge" [(ngModel)]="serviceCharge" name="serviceCharge">
+                <label for="serviceCharge">&nbsp; Add Service Charge</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

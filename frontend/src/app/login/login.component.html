@@ -1,0 +1,48 @@
+<div *ngIf="loading" class="spinner-border text-primary" style="z-index:1000;position:absolute;top:50vh;left:46vw;" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="container d-flex align-items-center justify-content-center vh-100 bg-light">
+  <div class="card shadow-lg border-0" style="width: 400px; border-radius: 15px; overflow: hidden;">
+    <div class="card-header bg-primary text-white text-center py-4">
+      <h2 class="mb-0">Shri Shyam Ji Traders</h2>
+    </div>
+    <div class="card-body p-4">
+      <h5 class="text-center text-secondary mb-3">Welcome Back!</h5>
+      <p class="text-center text-muted mb-4">Please login to your account</p>
+      <form (ngSubmit)="onLogin()" class="needs-validation" novalidate>
+        <div class="form-floating mb-3">
+          <input 
+            type="text" 
+            id="username" 
+            class="form-control" 
+            [(ngModel)]="username" 
+            name="username" 
+            required 
+            placeholder="Username" 
+          />
+          <label for="username">Username</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input 
+            type="password" 
+            id="password" 
+            class="form-control" 
+            [(ngModel)]="password" 
+            name="password" 
+            required 
+            placeholder="Password" 
+          />
+          <label for="password">Password</label>
+        </div>
+        <div *ngIf="wrong" class="alert alert-danger text-center" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          Wrong Credentials
+        </div>
+        <button type="submit" class="btn btn-primary w-100 py-2">Login</button>
+      </form>
+      
+    <div class="card-footer text-center py-3">
+      <small class="text-muted">© 2024 Shri Shyam Ji Traders</small>
+    </div>
+  </div>
+</div>

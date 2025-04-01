@@ -1,0 +1,34 @@
+{
+    "jwt": {
+        "private_key": "./src/misc/keys/private.pem",
+        "public_key": "./src/misc/keys/public.pem",
+        "access_token_expiry_time": 3600,
+        "refresh_token_expiry_time": 86400,
+        "paraphrase": "DAILEETCODE_API",
+        "test_token_expiry_time": 3600
+    },
+    "smtp": {
+            "from": "nimitdidwania27@gmail.com",
+            "host": "smtp-relay.brevo.com",
+            "port": 587,
+            "secure": "true",
+            "auth": {
+                "user": "nimitdidwania27@gmail.com",
+                "pass": "S9LtFxc3WN1PhvgG"
+            }
+        },
+    "database": {
+        "connectionString": "mongodb+srv://admin:GenPDF@Nimit@123@cluster0.g0nuq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        "sslCAFileName": null,
+        "useSSL": false,
+        "dbName": "bm"
+    },
+    "publicRoutes": [
+        "/auth/signup",
+        "/auth/login",
+        "/health",
+        "/access-token",
+        "/public",
+        "/generate"
+    ]
+}

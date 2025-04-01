@@ -1,0 +1,163 @@
+<div class="d-flex flex-column min-vh-100 bg-light">
+
+<div *ngIf="loading" class="spinner-border text-primary" style="z-index:1000;position:absolute;top:50vh;left:46vw;" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<app-supplier-modal (supplierCreated)="addSupplier($event)"></app-supplier-modal>
+<app-supply-modal (supplyCreated) = "addSupply($event)"></app-supply-modal>
+<app-ledger-modal (submitData) = "addLedger($event)"></app-ledger-modal>
+
+<!-- suppliers Section -->
+<section class="container-fluid p-4 flex-fill">
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="input-group shadow-sm">
+                <!-- Search Bar -->
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="filterSupplierName" 
+                    placeholder="🔍 Search suppliers..." 
+                    (input)="applyFilter()" 
+                    aria-label="Search suppliers" />
+    
+                <!-- Calendar Button -->
+                <button 
+                    type="button" 
+                    class="btn btn-outline-secondary" 
+                    (click)="toggleCalendarPopup()" 
+                    aria-label="Filter by date">
+                    <i class="bi bi-calendar-date me-1"></i>
+                </button>
+    
+                <!-- Calendar Popup -->
+                <div 
+                    *ngIf="showCalendarPopup" 
+                    class="position-absolute shadow-lg bg-white p-3 rounded"
+                    style="z-index: 1050; top: 8vh; right: 10vw;">
+                    <label for="fromDate" class="form-label">From Date</label>
+                    <input 
+                        id="fromDate"
+                        type="date"
+                        class="form-control mb-2" 
+                        [(ngModel)]="filterFromDate" />
+                    
+                    <label for="toDate" class="form-label">To Date</label>
+                    <input 
+                        id="toDate"
+                        type="date"
+                        class="form-control mb-2" 
+                        [(ngModel)]="filterToDate" />
+                    <div class="button-container">
+
+                        <button 
+                            class="btn btn-primary w-45 mt-2"
+                            (click)="applyDateFilter()">
+                            Apply
+                        </button>
+                        <button 
+                            class="btn btn-secondary w-45 mt-2"
+                            (click)="clearDateFilter()">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <!-- Download Button -->
+                <div class="dropdown ">
+                    <button 
+                        class="btn-icon" 
+                        type="button" 
+                        id="downloadButton" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false" 
+                        aria-label="Download options">
+                        <i class="bi bi-menu-button-wide"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="downloadButton">
+                        <li><a class="dropdown-item" (click)="downloadSummary()">Download Summary</a></li>
+                        <!-- <li><a class="dropdown-item" (click)="downloadSuppliers()">suppliers</a></li> -->
+                        <li><a class="dropdown-item" (click)="openSupplierModal()">Add Supplier</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <!-- Invoice Cards -->
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="supplies.length > 0" class="invoice-list">
+                <div *ngFor="let supply of supplies; let idx = index;" class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary" (click)="navigateToLedger(supply)">{{supply.supplier.name}}</h5>
+                        <p class="card-text">
+                            <strong>वाहन:</strong> 
+                            <a class="text-decoration-underline text-primary" >
+                                {{ supply.vehicle }}
+                            </a>
+                            <br />
+                            <!-- <strong>Date:</strong> {{ supplier.date }} <br /> -->
+                            <strong>वज़न:</strong> {{supply.weight}} <br />
+                            <strong>रेट:</strong> {{supply.rate}} <br />
+
+                            <strong>डस्ट:</strong> {{supply.dust}} <br />
+                            <strong>मॉइस्चर:</strong> {{supply.moisture}} <br />
+                            <strong>टोटल(इस वाहन का):</strong> <span class="text-success">₹{{ supply.total + (supply.cash ?? 0)}}</span> <br/>
+                            <strong>नकद:</strong> {{supply.cash}} <br />
+                            <strong >हिसाब:</strong> 
+                            <span id="balance" class="text-success">₹<span id="balance-value">{{supply.balance|| "-"}}</span></span>&nbsp;
+                            <i class="bi bi-eye" (click) = "fetchBalance(supply)" ></i> <br />
+                            <strong>खाता</strong> {{supply.remark ?? ""}}<br />
+                            <strong>पैसा लगा:</strong> <button *ngIf="supply.paid == undefined || supply.paid == null" (click) = openLedgerModal(supply) >Pay</button> <span *ngIf="supply.paid" > {{supply.paid}}</span> <br />
+                            <span *ngIf="supply.balance"><strong>कुल हिसाब:</strong> {{supply.balance -(supply.paid ?? 0)}}</span>
+                        </p>
+                        <div class="d-flex justify-content-end mt-3">
+                            <a [href]="'https://wa.me/?text=' + getWAText(supply)" 
+                               target="_blank" 
+                               class="btn btn-success d-flex align-items-center">
+                                <i class="bi bi-whatsapp fs-6"></i>&nbsp;
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <nav *ngIf="!loading && getTotalPages() >= 1" class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" [class.disabled]="pageDetails.pageNo === 1">
+                        <button class="page-link" (click)="changePage(pageDetails.pageNo - 1)" [disabled]="pageDetails.pageNo === 1">
+                            &laquo;
+                        </button>
+                    </li>
+                    <li class="page-item">
+                        <button class="page-link">{{ pageDetails.pageNo }}</button>
+                    </li>
+                    <li class="page-item" [class.disabled]="pageDetails.pageNo === getTotalPages()">
+                        <button class="page-link" (click)="changePage(pageDetails.pageNo + 1)" [disabled]="pageDetails.pageNo === getTotalPages()">
+                            &raquo;
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <!-- No suppliers Found -->
+            <div *ngIf="!loading && supplies.length === 0" class="text-center mt-5">
+                <p class="text-muted fs-5">No supplies found.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Floating Action Button -->
+<button 
+    class="btn btn-primary btn-lg rounded-circle position-fixed shadow"
+    style="bottom: 80px; right: 30px;" 
+    (click)="openSupplyModal()">
+    ✚
+</button>
+</div>

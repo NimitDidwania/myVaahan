@@ -1,0 +1,138 @@
+<div class="d-flex flex-column min-vh-100 bg-light">
+    <!-- Spinner for Loading -->
+    <div *ngIf="loading" class="spinner-border text-primary" style="z-index:1000;position:absolute;top:50vh;left:46vw;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <!-- Invoice Modal -->
+    <app-invoice-modal (invoiceCreated)="invoiceMethod($event)"></app-invoice-modal>
+
+    <!-- Invoices Section -->
+    <section class="container-fluid p-4 flex-fill">
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="input-group shadow-sm">
+                    <!-- Search Bar -->
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        [(ngModel)]="filterInvoiceNo" 
+                        placeholder="🔍 Search invoices..." 
+                        (input)="applyFilter()" 
+                        aria-label="Search invoices" />
+        
+                    <!-- Calendar Button -->
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-secondary" 
+                        (click)="toggleCalendarPopup()" 
+                        aria-label="Filter by date">
+                        <i class="bi bi-calendar-date me-1"></i>
+                    </button>
+        
+                    <!-- Calendar Popup -->
+                    <div 
+                        *ngIf="showCalendarPopup" 
+                        class="position-absolute shadow-lg bg-white p-3 rounded"
+                        style="z-index: 1050; top: 8vh; right: 10vw;">
+                        <label for="fromDate" class="form-label">From Date</label>
+                        <input 
+                            id="fromDate"
+                            type="date"
+                            class="form-control mb-2" 
+                            [(ngModel)]="filterFromDate" />
+                        
+                        <label for="toDate" class="form-label">To Date</label>
+                        <input 
+                            id="toDate"
+                            type="date"
+                            class="form-control mb-2" 
+                            [(ngModel)]="filterToDate" />
+                        <div class="button-container">
+
+                            <button 
+                                class="btn btn-primary w-45 mt-2"
+                                (click)="applyDateFilter()">
+                                Apply
+                            </button>
+                            <button 
+                                class="btn btn-secondary w-45 mt-2"
+                                (click)="clearDateFilter()">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Download Button -->
+                    <div class="dropdown ">
+                        <button 
+                            class="btn-icon" 
+                            type="button" 
+                            id="downloadButton" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false" 
+                            aria-label="Download options">
+                            <i class="bi bi-download"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="downloadButton">
+                            <li><a class="dropdown-item" (click)="downloadSummary()">Summary</a></li>
+                            <li><a class="dropdown-item" (click)="downloadInvoices()">Invoices</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        
+
+        <!-- Invoice Cards -->
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="invoices.length > 0" class="invoice-list">
+                    <div *ngFor="let invoice of invoices; let idx = index;" class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary" (click)="openInvoiceModal(invoice)">{{invoice.vehicleNo}}</h5>
+                            <p class="card-text">
+                                <br />
+                                <strong>Pollution:</strong> {{ invoice.expiry.pollution }} <br />
+                                <strong>Fitness:</strong> {{invoice.expiry.pollution}} <br />
+                                <strong>Insurance:</strong> {{invoice.expiry.pollution}} <br />
+                                <strong>Tax:</strong> {{invoice.expiry.pollution}} <br />
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <nav *ngIf="getTotalPages() >= 1" class="mt-3">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" [class.disabled]="pageDetails.pageNo === 1">
+                            <button class="page-link" (click)="changePage(pageDetails.pageNo - 1)" [disabled]="pageDetails.pageNo === 1">
+                                &laquo;
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link">{{ pageDetails.pageNo }}</button>
+                        </li>
+                        <li class="page-item" [class.disabled]="pageDetails.pageNo === getTotalPages()">
+                            <button class="page-link" (click)="changePage(pageDetails.pageNo + 1)" [disabled]="pageDetails.pageNo === getTotalPages()">
+                                &raquo;
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- No Invoices Found -->
+                <div *ngIf="!loading && invoices.length === 0" class="text-center mt-5">
+                    <p class="text-muted fs-5">No Vehicles Found.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Action Button -->
+    <button 
+        class="btn btn-primary btn-lg rounded-circle position-fixed shadow"
+        style="bottom: 80px; right: 30px;" 
+        (click)="openInvoiceModal()">
+        ✚
+    </button>
+</div>

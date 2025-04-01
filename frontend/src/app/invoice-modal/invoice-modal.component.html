@@ -1,0 +1,46 @@
+<div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="invoiceModalLabel">{{type}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="submit()">
+
+            <div *ngIf="type == 'Edit Invoice'" class="mb-3 d-flex align-items-center">
+              <label for="cancel" class="form-label mb-0 me-2">Cancel</label>
+              <input type="checkbox" class="form-check-input" id="cancel" [(ngModel)]="cancel" name="cancel" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="issueDate" class="form-label">Issue Date</label>
+              <input type="date" class="form-control" id="issueDate" [(ngModel)]="invoiceData.issueDateEpoch" name="issueDate" required>
+            </div>
+            <div class="mb-3 required">
+              <label for="vehicleNo" class="form-label">Vehicle No</label>
+              <input type="text" class="form-control" id="vehicleNo" [(ngModel)]="invoiceData.vehicleNo" name="vehicleNo" required>
+            </div> 
+            <div class="mb-3">
+                <label for="challanNo" class="form-label">Challan No</label>
+                <input type="text" class="form-control" id="challanNo" [(ngModel)]="invoiceData.challanNo" name="challanNo">
+            </div> 
+            <div class="mb-3">
+                <label for="poNo" class="form-label">PO No</label>
+                <input type="text" class="form-control" id="poNo" [(ngModel)]="invoiceData.poNo" name="poNo">
+            </div> 
+            <div class="mb-3 required">
+              <label for="rate" class="form-label">Rate</label>
+              <input type="number" class="form-control" id="rate" [(ngModel)]="invoiceData.item.rate" name="rate" required>
+            </div>
+            <div class="mb-3 required">
+                <label for="weight" class="form-label">Weight</label>
+                <input type="number" class="form-control" id="weight" [(ngModel)]="invoiceData.item.weight" name="weight" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
